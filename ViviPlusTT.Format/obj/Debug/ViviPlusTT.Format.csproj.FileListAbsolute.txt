@@ -1,0 +1,6 @@
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Format\bin\Debug\ViviPlusTT.Format.dll
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Format\bin\Debug\ViviPlusTT.Format.pdb
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Format\bin\Debug\FileHelpers.dll
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Format\obj\Debug\ViviPlusTT.Format.csprojResolveAssemblyReference.cache
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Format\obj\Debug\ViviPlusTT.Format.dll
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Format\obj\Debug\ViviPlusTT.Format.pdb

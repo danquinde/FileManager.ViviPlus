@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ViviPlusTTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ViviPlusTTEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Convertion" EntityType="ViviPlusTTModel.Convertion" />
+    <EntitySet Name="Format" EntityType="ViviPlusTTModel.Format" />
+    <EntitySet Name="Response" EntityType="ViviPlusTTModel.Response" />
+    <EntitySet Name="ResponseData" EntityType="ViviPlusTTModel.ResponseData" />
+    <AssociationSet Name="FK_Format_Convertion" Association="ViviPlusTTModel.FK_Format_Convertion">
+      <End Role="Convertion" EntitySet="Convertion" />
+      <End Role="Format" EntitySet="Format" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Response_Format" Association="ViviPlusTTModel.FK_Response_Format">
+      <End Role="Format" EntitySet="Format" />
+      <End Role="Response" EntitySet="Response" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ResponseData_Response" Association="ViviPlusTTModel.FK_ResponseData_Response">
+      <End Role="Response" EntitySet="Response" />
+      <End Role="ResponseData" EntitySet="ResponseData" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Convertion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Formula" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Format" Relationship="ViviPlusTTModel.FK_Format_Convertion" FromRole="Convertion" ToRole="Format" />
+  </EntityType>
+  <EntityType Name="Format">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="ConvertId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IOClassName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Currency" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="InputPath" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="OutputPath" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IbsFormatId" Type="Int32" Nullable="false" />
+    <Property Name="InputPattern" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OutputPattern" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Convertion" Relationship="ViviPlusTTModel.FK_Format_Convertion" FromRole="Format" ToRole="Convertion" />
+    <NavigationProperty Name="Response" Relationship="ViviPlusTTModel.FK_Response_Format" FromRole="Format" ToRole="Response" />
+  </EntityType>
+  <EntityType Name="Response">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProcessDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FormatId" Type="Int32" Nullable="false" />
+    <Property Name="FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Records" Type="Int16" Nullable="false" />
+    <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="TotalConverted" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="RegisteredBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="XMLGenerated" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="BankImportId" Type="Int32" />
+    <Property Name="AuditLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Format" Relationship="ViviPlusTTModel.FK_Response_Format" FromRole="Response" ToRole="Format" />
+    <NavigationProperty Name="ResponseData" Relationship="ViviPlusTTModel.FK_ResponseData_Response" FromRole="Response" ToRole="ResponseData" />
+  </EntityType>
+  <EntityType Name="ResponseData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResponseId" Type="Int32" Nullable="false" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceNumber" Type="Int64" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="AmountConverted" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="Account" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AccountType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Creditcard" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CardExpiry" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Response" Relationship="ViviPlusTTModel.FK_ResponseData_Response" FromRole="ResponseData" ToRole="Response" />
+  </EntityType>
+  <Association Name="FK_Format_Convertion">
+    <End Type="ViviPlusTTModel.Convertion" Role="Convertion" Multiplicity="1" />
+    <End Type="ViviPlusTTModel.Format" Role="Format" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Convertion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Format">
+        <PropertyRef Name="ConvertId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Response_Format">
+    <End Type="ViviPlusTTModel.Format" Role="Format" Multiplicity="1" />
+    <End Type="ViviPlusTTModel.Response" Role="Response" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Format">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Response">
+        <PropertyRef Name="FormatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ResponseData_Response">
+    <End Type="ViviPlusTTModel.Response" Role="Response" Multiplicity="1" />
+    <End Type="ViviPlusTTModel.ResponseData" Role="ResponseData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Response">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ResponseData">
+        <PropertyRef Name="ResponseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

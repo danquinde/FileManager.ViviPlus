@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ViviPlusTTModelStoreContainer" CdmEntityContainer="ViviPlusTTEntities">
+    <EntitySetMapping Name="Convertion">
+      <EntityTypeMapping TypeName="ViviPlusTTModel.Convertion">
+        <MappingFragment StoreEntitySet="Convertion">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Formula" ColumnName="Formula" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Format">
+      <EntityTypeMapping TypeName="ViviPlusTTModel.Format">
+        <MappingFragment StoreEntitySet="Format">
+          <ScalarProperty Name="OutputPattern" ColumnName="OutputPattern" />
+          <ScalarProperty Name="InputPattern" ColumnName="InputPattern" />
+          <ScalarProperty Name="IbsFormatId" ColumnName="IbsFormatId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="OutputPath" ColumnName="OutputPath" />
+          <ScalarProperty Name="InputPath" ColumnName="InputPath" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="IOClassName" ColumnName="IOClassName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ConvertId" ColumnName="ConvertId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Response">
+      <EntityTypeMapping TypeName="ViviPlusTTModel.Response">
+        <MappingFragment StoreEntitySet="Response">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AuditLog" ColumnName="AuditLog" />
+          <ScalarProperty Name="BankImportId" ColumnName="BankImportId" />
+          <ScalarProperty Name="XMLGenerated" ColumnName="XMLGenerated" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="RegisteredBy" ColumnName="RegisteredBy" />
+          <ScalarProperty Name="TotalConverted" ColumnName="TotalConverted" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Records" ColumnName="Records" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FormatId" ColumnName="FormatId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ProcessDate" ColumnName="ProcessDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResponseData">
+      <EntityTypeMapping TypeName="ViviPlusTTModel.ResponseData">
+        <MappingFragment StoreEntitySet="ResponseData">
+          <ScalarProperty Name="CardExpiry" ColumnName="CardExpiry" />
+          <ScalarProperty Name="Creditcard" ColumnName="Creditcard" />
+          <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="AmountConverted" ColumnName="AmountConverted" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7f85a5a639824f9791a8a9fdc5661f47" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="ViviPlusTTModel.Convertion" Width="1.5" PointX="5.375" PointY="1.25" />
+        <EntityTypeShape EntityType="ViviPlusTTModel.Format" Width="1.5" PointX="6.875" PointY="3.875" />
+        <EntityTypeShape EntityType="ViviPlusTTModel.Response" Width="1.5" PointX="9.375" PointY="5.5" />
+        <EntityTypeShape EntityType="ViviPlusTTModel.ResponseData" Width="1.5" PointX="11.5" PointY="8.125" />
+        <AssociationConnector Association="ViviPlusTTModel.FK_Format_Convertion" />
+        <AssociationConnector Association="ViviPlusTTModel.FK_Response_Format" />
+        <AssociationConnector Association="ViviPlusTTModel.FK_ResponseData_Response" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ViviPlusTTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Convertion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Formula" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Format">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ConvertId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IOClassName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Currency" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="InputPath" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="OutputPath" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IbsFormatId" Type="int" Nullable="false" />
+    <Property Name="InputPattern" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="OutputPattern" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Response">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProcessDate" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FormatId" Type="int" Nullable="false" />
+    <Property Name="FileName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Records" Type="smallint" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="TotalConverted" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="RegisteredBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="XMLGenerated" Type="varchar" MaxLength="500" />
+    <Property Name="BankImportId" Type="int" />
+    <Property Name="AuditLog" Type="varchar(max)" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ResponseData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ResponseId" Type="int" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="InvoiceNumber" Type="bigint" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="AmountConverted" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="Account" Type="varchar" MaxLength="100" />
+    <Property Name="AccountType" Type="varchar" MaxLength="100" />
+    <Property Name="Creditcard" Type="varchar" MaxLength="100" />
+    <Property Name="CardExpiry" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_Format_Convertion">
+    <End Role="Convertion" Type="Self.Convertion" Multiplicity="1" />
+    <End Role="Format" Type="Self.Format" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Convertion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Format">
+        <PropertyRef Name="ConvertId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Response_Format">
+    <End Role="Format" Type="Self.Format" Multiplicity="1" />
+    <End Role="Response" Type="Self.Response" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Format">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Response">
+        <PropertyRef Name="FormatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ResponseData_Response">
+    <End Role="Response" Type="Self.Response" Multiplicity="1" />
+    <End Role="ResponseData" Type="Self.ResponseData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Response">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ResponseData">
+        <PropertyRef Name="ResponseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ViviPlusTTModelStoreContainer">
+    <EntitySet Name="Convertion" EntityType="Self.Convertion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Format" EntityType="Self.Format" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Response" EntityType="Self.Response" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResponseData" EntityType="Self.ResponseData" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Format_Convertion" Association="Self.FK_Format_Convertion">
+      <End Role="Convertion" EntitySet="Convertion" />
+      <End Role="Format" EntitySet="Format" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Response_Format" Association="Self.FK_Response_Format">
+      <End Role="Format" EntitySet="Format" />
+      <End Role="Response" EntitySet="Response" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ResponseData_Response" Association="Self.FK_ResponseData_Response">
+      <End Role="Response" EntitySet="Response" />
+      <End Role="ResponseData" EntitySet="ResponseData" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

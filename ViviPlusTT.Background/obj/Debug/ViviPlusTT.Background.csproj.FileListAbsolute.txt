@@ -1,0 +1,17 @@
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\ViviPlusTT.Background.exe.config
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\obj\Debug\ViviPlusTT.Background.csprojResolveAssemblyReference.cache
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\ViviPlusTT.Background.exe
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\ViviPlusTT.Background.pdb
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\ViviPlusTT.Core.dll
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\ViviPlusTT.Infrastructure.dll
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\ViviPlusTT.Adapter.dll
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\EntityFramework.dll
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\FileHelpers.dll
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\ViviPlusTT.Format.dll
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\ViviPlusTT.Core.pdb
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\ViviPlusTT.Infrastructure.pdb
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\ViviPlusTT.Adapter.pdb
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\EntityFramework.xml
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\bin\Debug\ViviPlusTT.Format.pdb
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\obj\Debug\ViviPlusTT.Background.exe
+C:\Fuentes\ViviPlusTT\ViviPlusTT\ViviPlusTT.Background\obj\Debug\ViviPlusTT.Background.pdb

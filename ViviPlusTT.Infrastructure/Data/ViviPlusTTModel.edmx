@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ViviPlusTTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Convertion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Formula" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Format">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ConvertId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IOClassName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Currency" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="InputPath" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="OutputPath" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IbsFormatId" Type="int" Nullable="false" />
+          <Property Name="InputPattern" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OutputPattern" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProcessDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FormatId" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Records" Type="smallint" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="TotalConverted" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="RegisteredBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="XMLGenerated" Type="varchar" MaxLength="500" />
+          <Property Name="BankImportId" Type="int" />
+          <Property Name="AuditLog" Type="varchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResponseData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResponseId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="bigint" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="AmountConverted" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Account" Type="varchar" MaxLength="100" />
+          <Property Name="AccountType" Type="varchar" MaxLength="100" />
+          <Property Name="Creditcard" Type="varchar" MaxLength="100" />
+          <Property Name="CardExpiry" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Format_Convertion">
+          <End Role="Convertion" Type="Self.Convertion" Multiplicity="1" />
+          <End Role="Format" Type="Self.Format" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Convertion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Format">
+              <PropertyRef Name="ConvertId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_Format">
+          <End Role="Format" Type="Self.Format" Multiplicity="1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Format">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="FormatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResponseData_Response">
+          <End Role="Response" Type="Self.Response" Multiplicity="1" />
+          <End Role="ResponseData" Type="Self.ResponseData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Response">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResponseData">
+              <PropertyRef Name="ResponseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ViviPlusTTModelStoreContainer">
+          <EntitySet Name="Convertion" EntityType="Self.Convertion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Format" EntityType="Self.Format" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Response" EntityType="Self.Response" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResponseData" EntityType="Self.ResponseData" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Format_Convertion" Association="Self.FK_Format_Convertion">
+            <End Role="Convertion" EntitySet="Convertion" />
+            <End Role="Format" EntitySet="Format" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_Format" Association="Self.FK_Response_Format">
+            <End Role="Format" EntitySet="Format" />
+            <End Role="Response" EntitySet="Response" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResponseData_Response" Association="Self.FK_ResponseData_Response">
+            <End Role="Response" EntitySet="Response" />
+            <End Role="ResponseData" EntitySet="ResponseData" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ViviPlusTTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ViviPlusTTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Convertion" EntityType="ViviPlusTTModel.Convertion" />
+          <EntitySet Name="Format" EntityType="ViviPlusTTModel.Format" />
+          <EntitySet Name="Response" EntityType="ViviPlusTTModel.Response" />
+          <EntitySet Name="ResponseData" EntityType="ViviPlusTTModel.ResponseData" />
+          <AssociationSet Name="FK_Format_Convertion" Association="ViviPlusTTModel.FK_Format_Convertion">
+            <End Role="Convertion" EntitySet="Convertion" />
+            <End Role="Format" EntitySet="Format" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_Format" Association="ViviPlusTTModel.FK_Response_Format">
+            <End Role="Format" EntitySet="Format" />
+            <End Role="Response" EntitySet="Response" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResponseData_Response" Association="ViviPlusTTModel.FK_ResponseData_Response">
+            <End Role="Response" EntitySet="Response" />
+            <End Role="ResponseData" EntitySet="ResponseData" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Convertion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Formula" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Format" Relationship="ViviPlusTTModel.FK_Format_Convertion" FromRole="Convertion" ToRole="Format" />
+        </EntityType>
+        <EntityType Name="Format">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ConvertId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IOClassName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Currency" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="InputPath" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OutputPath" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IbsFormatId" Type="Int32" Nullable="false" />
+          <Property Name="InputPattern" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OutputPattern" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Convertion" Relationship="ViviPlusTTModel.FK_Format_Convertion" FromRole="Format" ToRole="Convertion" />
+          <NavigationProperty Name="Response" Relationship="ViviPlusTTModel.FK_Response_Format" FromRole="Format" ToRole="Response" />
+        </EntityType>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProcessDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FormatId" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Records" Type="Int16" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="TotalConverted" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="RegisteredBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="XMLGenerated" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="BankImportId" Type="Int32" />
+          <Property Name="AuditLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Format" Relationship="ViviPlusTTModel.FK_Response_Format" FromRole="Response" ToRole="Format" />
+          <NavigationProperty Name="ResponseData" Relationship="ViviPlusTTModel.FK_ResponseData_Response" FromRole="Response" ToRole="ResponseData" />
+        </EntityType>
+        <EntityType Name="ResponseData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResponseId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="Int64" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="AmountConverted" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Account" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AccountType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Creditcard" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CardExpiry" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Response" Relationship="ViviPlusTTModel.FK_ResponseData_Response" FromRole="ResponseData" ToRole="Response" />
+        </EntityType>
+        <Association Name="FK_Format_Convertion">
+          <End Type="ViviPlusTTModel.Convertion" Role="Convertion" Multiplicity="1" />
+          <End Type="ViviPlusTTModel.Format" Role="Format" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Convertion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Format">
+              <PropertyRef Name="ConvertId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_Format">
+          <End Type="ViviPlusTTModel.Format" Role="Format" Multiplicity="1" />
+          <End Type="ViviPlusTTModel.Response" Role="Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Format">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="FormatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResponseData_Response">
+          <End Type="ViviPlusTTModel.Response" Role="Response" Multiplicity="1" />
+          <End Type="ViviPlusTTModel.ResponseData" Role="ResponseData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Response">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResponseData">
+              <PropertyRef Name="ResponseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ViviPlusTTModelStoreContainer" CdmEntityContainer="ViviPlusTTEntities">
+          <EntitySetMapping Name="Convertion">
+            <EntityTypeMapping TypeName="ViviPlusTTModel.Convertion">
+              <MappingFragment StoreEntitySet="Convertion">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Formula" ColumnName="Formula" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Format">
+            <EntityTypeMapping TypeName="ViviPlusTTModel.Format">
+              <MappingFragment StoreEntitySet="Format">
+                <ScalarProperty Name="OutputPattern" ColumnName="OutputPattern" />
+                <ScalarProperty Name="InputPattern" ColumnName="InputPattern" />
+                <ScalarProperty Name="IbsFormatId" ColumnName="IbsFormatId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="OutputPath" ColumnName="OutputPath" />
+                <ScalarProperty Name="InputPath" ColumnName="InputPath" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="IOClassName" ColumnName="IOClassName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ConvertId" ColumnName="ConvertId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Response">
+            <EntityTypeMapping TypeName="ViviPlusTTModel.Response">
+              <MappingFragment StoreEntitySet="Response">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AuditLog" ColumnName="AuditLog" />
+                <ScalarProperty Name="BankImportId" ColumnName="BankImportId" />
+                <ScalarProperty Name="XMLGenerated" ColumnName="XMLGenerated" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="RegisteredBy" ColumnName="RegisteredBy" />
+                <ScalarProperty Name="TotalConverted" ColumnName="TotalConverted" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Records" ColumnName="Records" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FormatId" ColumnName="FormatId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProcessDate" ColumnName="ProcessDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResponseData">
+            <EntityTypeMapping TypeName="ViviPlusTTModel.ResponseData">
+              <MappingFragment StoreEntitySet="ResponseData">
+                <ScalarProperty Name="CardExpiry" ColumnName="CardExpiry" />
+                <ScalarProperty Name="Creditcard" ColumnName="Creditcard" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="AmountConverted" ColumnName="AmountConverted" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
